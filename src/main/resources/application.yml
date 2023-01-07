@@ -1,0 +1,61 @@
+name: cms
+server:
+  port: 8888
+spring:
+  freemarker:
+    enabled: true
+    cache: false
+    suffix: .ftl
+    charset: utf-8
+    content-type: text/html
+    allow-request-override: true
+    allow-session-override: true
+    check-template-location: true
+    expose-request-attributes: true
+    expose-session-attributes: true
+    expose-spring-macro-helpers: true
+    request-context-attribute: request
+    template-loader-path: classpath:/templates/
+    settings:
+      number_format: 0
+    resources:
+      static-locations: classpath:/static/,classpath:/META-INF/resources/templates/,classpath:/resources/templates/,classpath:/resources/templates/public/
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/cmsmgr?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: tiger
+    type: com.alibaba.druid.pool.DruidDataSource
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  typeAliasesPackage: com.ssj.cms.entity
+  global-config:
+    db-config:
+      id-type: AUTO
+      field-strategy: not_empty
+      column-underline: true
+      logic-delete-value: 0
+      logic-not-delete-value: 1
+      db-type: mysql
+    refresh: true
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+  logging:
+    level: warn
+#分页插件
+pagehelper:
+  helper-dialect: mysql
+  params=count: countSql
+  reasonable: true
+  support-methods-arguments: true
+img:
+  path: D:\\img\\
+
+
+
